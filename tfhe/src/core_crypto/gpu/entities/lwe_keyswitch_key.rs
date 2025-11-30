@@ -30,12 +30,14 @@ impl<T: UnsignedInteger> CudaLweKeyswitchKey<T> {
     ) -> Self
     where
         O: CastInto<T>,
+        //    pub fn from_lwe_keyswitch_key(h_ksk: &LweKeyswitchKeyOwned<T>, streams: &CudaStreams)
+        // -> Self
     {
         let decomp_base_log = h_ksk.decomposition_base_log();
         let decomp_level_count = h_ksk.decomposition_level_count();
         let input_lwe_size = h_ksk.input_key_lwe_dimension().to_lwe_size();
         let output_lwe_size = h_ksk.output_key_lwe_dimension().to_lwe_size();
-        let ciphertext_modulus = CiphertextModulus::<T>::new_native(); //h_ksk.ciphertext_modulus().try_to().unwrap();
+        let ciphertext_modulus = h_ksk.ciphertext_modulus().try_to().unwrap();
 
         // Allocate memory
         let mut d_vec = CudaVec::<T>::new_multi_gpu(

@@ -717,7 +717,7 @@ test_gpu: test_core_crypto_gpu test_integer_gpu test_cuda_backend
 .PHONY: test_core_crypto_gpu # Run the tests of the core_crypto module including experimental on the gpu backend
 test_core_crypto_gpu: install_rs_build_toolchain
 	RUSTFLAGS="$(RUSTFLAGS)" cargo $(CARGO_RS_BUILD_TOOLCHAIN) test --profile dev \
-		--features=gpu-debug -p tfhe -- core_crypto::gpu::algorithms::test::lwe_keyswitch::test_gpu_lwe_encrypt_ks_decrypt_custom_mod
+		--features=gpu-debug -p tfhe -- core_crypto::gpu::algorithms::test::lwe_keyswitch:: --nocapture
 #	RUSTFLAGS="$(RUSTFLAGS)" cargo $(CARGO_RS_BUILD_TOOLCHAIN) test --doc --profile $(CARGO_PROFILE) \
 		--features=gpu -p tfhe -- core_crypto::gpu::
 
